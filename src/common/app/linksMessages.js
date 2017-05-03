@@ -14,6 +14,10 @@ const LinkMessages = defineMessages({
     defaultMessage: 'Users',
     id: 'app.links.users',
   },
+  chat: {
+    defaultMessage: 'Chat',
+    id: 'app.links.chat',
+  },
   home: {
     defaultMessage: 'Home',
     id: 'app.links.home',

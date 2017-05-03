@@ -18,6 +18,7 @@ import SettingsPage from '../me/SettingsPage';
 import SignInPage from '../auth/SignInPage';
 import TodosPage from '../todos/TodosPage';
 import UsersPage from '../users/UsersPage';
+import ChatPage from '../chat/ChatPage';
 
 // Custom route to require viewer aka authenticated user.
 const AuthorizedRoute = () => {};
@@ -49,6 +50,14 @@ const routeConfig = makeRouteConfig(
     <Route
       path="users"
       Component={UsersPage}
+      getData={queryFirebase(
+        ref => [ref.child('users-presence'), 'value', onUsersPresence],
+        // ref => [ref.child('what-ever').limitToFirst(1), 'value', onWhatEver],
+      )}
+    />
+    <Route
+      path="chat"
+      Component={ChatPage}
       getData={queryFirebase(
         ref => [ref.child('users-presence'), 'value', onUsersPresence],
         // ref => [ref.child('what-ever').limitToFirst(1), 'value', onWhatEver],

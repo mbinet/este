@@ -40,6 +40,7 @@ const Header = ({ viewer }: HeaderProps) => (
   >
     <HeaderLink exact to="/" message={linksMessages.home} />
     <HeaderLink to="/users" message={linksMessages.users} />
+    <HeaderLink to="/chat" message={linksMessages.chat} />
     <HeaderLink to="/todos" message={linksMessages.todos} />
     <HeaderLink to="/fields" message={linksMessages.fields} />
     <HeaderLink to="/intl" message={linksMessages.intl} />

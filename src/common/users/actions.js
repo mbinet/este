@@ -23,9 +23,11 @@ const saveUserEpic = (action$: any, { firebase }: Deps) =>
     action$.filter((action: Action) => action.type === 'SIGN_UP_DONE'),
   ).mergeMap(action => {
     const { email, ...user } = action.payload.user;
+    const lol = "ahahhahahahahahahha";
     const promise = firebase.update({
       [`users/${user.id}`]: user,
       [`users-emails/${user.id}`]: { email },
+      [`jrigole/${user.id}`]: { lol },
     });
     return Observable.from(promise)
       .map(saveUserDone)
