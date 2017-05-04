@@ -4,31 +4,31 @@ import linksMessages from '../../common/app/linksMessages';
 import { Box, PageHeader } from '../../common/components';
 import { FormattedMessage } from 'react-intl';
 import { Title } from '../components';
+import type { Action, UsersState } from '../types';
 
 //
 import firebase from 'firebase';
+import ListMessages from './ListMessages';
 
-var config = {
-  apiKey: "AIzaSyCeQV3Ynnnm1m5-XwgAcXAoEyq7yA39X2Q",
-  authDomain: "este-fork-f59e3.firebaseapp.com",
-  databaseURL: "https://este-fork-f59e3.firebaseio.com",
-  projectId: "este-fork-f59e3",
-  storageBucket: "este-fork-f59e3.appspot.com",
-  messagingSenderId: "445528574754"
-};
-firebase.initializeApp(config, "test");
 
-const rootRef = firebase.database().ref();
-export const tasksRef = rootRef.child('lol');
-export const timeRef = firebase.database.ServerValue.TIMESTAMP;
+function sendMessage(msg) {
+  const rootRef = firebase.database().ref();
+  const tasksRef = rootRef.child('messages');
+  const timeRef = firebase.database.ServerValue.TIMESTAMP;
 
-function handleSubmit(event) {
   const newTask = {
-    text: "HEY",
+    text: msg,
     timestamp: timeRef,
   };
   if (newTask.text.length) {
     tasksRef.push(newTask);
+  }
+}
+
+function handleKeyDown(e) {
+  if (e.keyCode == 13) {
+    sendMessage(e.target.value)
+    e.target.value = ""
   }
 }
 
@@ -38,7 +38,8 @@ const TodosPage = () => (
     <FormattedMessage {...linksMessages.chat}>
       {message => <PageHeader heading={message} />}
     </FormattedMessage>
-    yo
+    <ListMessages/>
+    <input type="text" onKeyDown={handleKeyDown.bind(this)} placeholder="Type in your message..."/>
   </Box>
 );
 
